@@ -4,30 +4,31 @@ import { connect } from 'react-redux'
 
 import Person from '../components/Person/Person';
 import AddPerson from '../components/AddPerson/AddPerson';
+import * as actionTypes from '../store/actions'
 
 
 class Persons extends Component {
-    state = {
-        persons: []
-    }
+    // state = {
+    //     persons: []
+    // }
 
-    personAddedHandler = () => {
-        const newPerson = {
-            id: Math.random(), // not really unique but good enough here!
-            name: 'Max',
-            age: Math.floor( Math.random() * 40 )
-        }
-        this.setState( ( prevState ) => {
-            return { persons: prevState.persons.concat(newPerson)}
-        } );
+    // personAddedHandler = () => {
+    //     const newPerson = {
+    //         id: Math.random(), // not really unique but good enough here!
+    //         name: 'Max',
+    //         age: Math.floor( Math.random() * 40 )
+    //     }
+    //     this.setState( ( prevState ) => {
+    //         return { persons: prevState.persons.concat(newPerson)}
+    //     } );
 
-    }
+    // }
 
-    personDeletedHandler = (personId) => {
-        this.setState( ( prevState ) => {
-            return { persons: prevState.persons.filter(person => person.id !== personId)}
-        } );
-    }
+    // personDeletedHandler = (personId) => {
+    //     this.setState( ( prevState ) => {
+    //         return { persons: prevState.persons.filter(person => person.id !== personId)}
+    //     } );
+    // }
 
     render () {
         return (
@@ -54,7 +55,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAddPerson: () => dispatch({
-            type: 'ADD_PERSON',
+            type: actionTypes.ADD_PERSON,
             newPerson: {
                 id: Math.random(), // not really unique but good enough here!
                 name: 'Max',
@@ -62,7 +63,7 @@ const mapDispatchToProps = dispatch => {
             }
         }),
         onDeletePerson: (id) => dispatch({
-            type: 'DELETE_PERSON', personId: id
+            type: actionTypes.DELETE_PERSON, personId: id
         })
     }
 }
