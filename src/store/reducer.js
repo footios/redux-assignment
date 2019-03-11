@@ -8,6 +8,10 @@ const reducer = (state = initialState, action) => {
             return {
                 persons: state.persons.concat(action.newPerson)
             }
+            case 'DELETE_PERSON':
+            return {
+                persons: state.persons.filter(person => person.id !== action.personId)
+            }
         default:
             return state
     }
