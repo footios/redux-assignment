@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import reducer from './store/reducer'
+// import reducer from './store/reducer'
+import addPersonReducer from '../src/store/reducers/addPerson'
+import byDateReducer from '../src/store/reducers/byDate'
 
-const store = createStore(reducer)
+const reducers = combineReducers({
+    addPer: addPersonReducer,
+    byD: byDateReducer
+})
+
+const store = createStore(reducers)
 
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

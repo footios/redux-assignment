@@ -63,9 +63,9 @@ class Persons extends Component {
 
 const mapStateToProps = state => {
     return {
-        ctr: state.counter,
-        pers: state.persons,
-        adds: state.additions
+        ctr: state.addPer.counter,
+        pers: state.addPer.persons,
+        adds: state.byD.additions
     }
 }
 
