@@ -4,8 +4,10 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'ACTION_TYPE':
-            return 
+        case 'ADD_PERSON':
+            return {
+                persons: state.persons.concat(action.newPerson)
+            }
         default:
             return state
     }

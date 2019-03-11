@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Person from '../components/Person/Person';
 import AddPerson from '../components/AddPerson/AddPerson';
 
+
 class Persons extends Component {
     // state = {
     //     persons: []
@@ -16,10 +17,10 @@ class Persons extends Component {
             name: 'Max',
             age: Math.floor( Math.random() * 40 )
         }
-        // this.setState( ( prevState ) => {
-        //     return { persons: prevState.persons.concat(newPerson)}
-        // } );
-        
+        this.setState( ( prevState ) => {
+            return { persons: prevState.persons.concat(newPerson)}
+        } );
+
     }
 
     personDeletedHandler = (personId) => {
@@ -31,8 +32,8 @@ class Persons extends Component {
     render () {
         return (
             <div>
-                <AddPerson personAdded={this.personAddedHandler} />
-                {this.state.persons.map(person => (
+                <AddPerson personAdded={this.props.addPerson} />
+                {this.props.pers.map(person => (
                     <Person 
                         key={person.id}
                         name={person.name} 
@@ -46,8 +47,21 @@ class Persons extends Component {
 
 const mapStateToProps = state => {
     return {
-        persons: state.persons
+        pers: state.persons
     }
 }
 
-export default connect(mapStateToProps)(Persons);
+const mapDispatchToProps = dispatch => {
+    return {
+        addPerson: () => dispatch({
+            type: 'ADD_PERSON',
+            newPerson: {
+                id: Math.random(), // not really unique but good enough here!
+                name: 'Max',
+                age: Math.floor( Math.random() * 40 )
+            }
+        })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Persons);
