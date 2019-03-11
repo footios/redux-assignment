@@ -33,6 +33,21 @@ class Persons extends Component {
     render () {
         return (
             <div>
+                <div style={{textAlign:'center'}} >Persons added: {this.props.ctr}</div>
+                <br></br>
+                <div style={{textAlign:'center'}}> Additions by date 
+                <br></br>
+                <button style={{width:'10%'}} onClick={() => this.props.onAddition(this.props.ctr)}>
+                Add by date </button>
+                <br></br>
+                <ul>
+                {this.props.adds.map(addition => (
+                    <li key={addition.date}>{addition.date} : Persons added: {addition.persons}</li>
+                ))} 
+                </ul>
+            </div>
+                
+                
                 <AddPerson personAdded={this.props.onAddPerson} />
                 {this.props.pers.map(person => (
                     <Person 
@@ -48,7 +63,9 @@ class Persons extends Component {
 
 const mapStateToProps = state => {
     return {
-        pers: state.persons
+        ctr: state.counter,
+        pers: state.persons,
+        adds: state.additions
     }
 }
 
@@ -64,6 +81,9 @@ const mapDispatchToProps = dispatch => {
         }),
         onDeletePerson: (id) => dispatch({
             type: actionTypes.DELETE_PERSON, personId: id
+        }),
+        onAddition: (persons) => dispatch({
+            type: actionTypes.ADDITION, personsAdded: persons
         })
     }
 }
