@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux'
+
 import Person from '../components/Person/Person';
 import AddPerson from '../components/AddPerson/AddPerson';
 
 class Persons extends Component {
-    state = {
-        persons: []
-    }
+    // state = {
+    //     persons: []
+    // }
 
     personAddedHandler = () => {
         const newPerson = {
@@ -14,9 +16,10 @@ class Persons extends Component {
             name: 'Max',
             age: Math.floor( Math.random() * 40 )
         }
-        this.setState( ( prevState ) => {
-            return { persons: prevState.persons.concat(newPerson)}
-        } );
+        // this.setState( ( prevState ) => {
+        //     return { persons: prevState.persons.concat(newPerson)}
+        // } );
+        
     }
 
     personDeletedHandler = (personId) => {
@@ -41,4 +44,10 @@ class Persons extends Component {
     }
 }
 
-export default Persons;
+const mapStateToProps = state => {
+    return {
+        persons: state.persons
+    }
+}
+
+export default connect(mapStateToProps)(Persons);
